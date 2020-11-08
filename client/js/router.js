@@ -18,12 +18,14 @@ import { init as msInit } from "./motorsport.js";
 
 const JTR_APP_NAME = "jtrApp";
 
-const JTR_ROUTES = {
+const DEFAULT_JTR_ROUTES = { 
     "home":       { "templateUrl": "partial/views/home.html",       "cache": null, "init": null   },
     "about":      { "templateUrl": "partial/views/about.html",      "cache": null, "init": null   },
     "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null, "init": null   },
     "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null, "init": msInit }
 };
+
+var JTR_ROUTES = DEFAULT_JTR_ROUTES;
 
 window.addEventListener("hashchange", loadRoute);
 
@@ -48,7 +50,7 @@ function obtainHtml(route) {
 function loadRoute() {
     let route = location.hash;
     
-    if(undefined === route)
+    if("" === route)
         location.hash = route = "/home";
 
     route = route.slice(2);
@@ -82,6 +84,17 @@ function renderHtml(html) {
     }
 }
 
+/**
+ * @brief Sets the available routes
+ *
+ * @param routes - The available routes
+ */
+function setRoutes(routes) {
+    JTR_ROUTES = routes;
+}
+
 export {
-    loadRoute
+    loadRoute,
+    setRoutes,
+    DEFAULT_JTR_ROUTES
 };

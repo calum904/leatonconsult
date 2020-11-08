@@ -9,10 +9,12 @@
  */
 import { loadHtml } from "./loadHtml.js";
 
-const JTR_PARTIALS = {
+const DEFAULT_JTR_PARTIALS = { 
     "jtr-navbar": { "templateUrl": "partial/components/navbar.html", "javascript": "", "cache": null },
     "jtr-footer": { "templateUrl": "partial/components/footer.html", "javascript": "", "cache": null }
 };
+
+var JTR_PARTIALS = DEFAULT_JTR_PARTIALS;
 
 /**
  * @brief Loads the partials into memory ready to be used
@@ -62,7 +64,18 @@ function renderPartials() {
     });
 }
 
+/**
+ * @brief Sets the available site partials
+ *
+ * @param partials - The available site partials
+ */
+function setPartials(partials) {
+    JTR_PARTIALS = partials;
+}
+
 export {
+    setPartials,
     loadPartials,
-    renderPartials
+    renderPartials,
+    DEFAULT_JTR_PARTIALS
 };

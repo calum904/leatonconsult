@@ -11,6 +11,8 @@ import { loadRoute } from "./router.js";
 
 import { loadPartials } from "./partial.js";
 
+import { init as msInit } from "./motorsport.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     loadPartials();
     loadRoute();
