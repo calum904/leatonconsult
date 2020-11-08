@@ -12,6 +12,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "jquery/dist/jquery.min.js";
 import "../client/css/stylesheet.css";
 
+import { loadRoute } from "../client/js/router.js";
+
 import { setTabs,     DEFAULT_JTR_MS_TABS  } from "../client/js/motorsport.js";
 import { setRoute,    DEFAULT_JTR_ROUTES   } from "../client/js/router.js";
 import { setPartials, DEFAULT_JTR_PARTIALS } from "../client/js/partial.js";
@@ -28,3 +30,5 @@ for(let r in routes)
 
 for(let p in partials)
     partials[p].cache = require("../client/" + partials[p].templateUrl);
+
+loadRoute();

@@ -96,5 +96,6 @@ function setRoutes(routes) {
 export {
     loadRoute,
     setRoutes,
+    renderHtml,
     DEFAULT_JTR_ROUTES
 };
