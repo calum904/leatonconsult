@@ -11,8 +11,13 @@ import { renderPartials } from "./partial.js";
 const JTR_APP_NAME = "jtrApp";
 
 const JTR_ROUTES = {
-    "home": { "templateUrl": "partial/views/home.html", "javascript": "js/home.js", "cache": null }
+    "home":       { "templateUrl": "partial/views/home.html",       "javascript": "", "cache": null },
+    "about":      { "templateUrl": "partial/views/about.html",      "javascript": "", "cache": null },
+    "contact":    { "templateUrl": "partial/views/contact.html",    "javascript": "", "cache": null },
+    "motorsport": { "templateUrl": "partial/views/motorsport.html", "javascript": "", "cache": null }
 };
+
+window.addEventListener("hashchange", loadRoute);
 
 /**
  * @brief Obtains the HTML associate with the route
@@ -23,10 +28,10 @@ const JTR_ROUTES = {
 function obtainHtml(route) {
     return new Promise((resolve, reject) => {
         fetch(JTR_ROUTES[route].templateUrl).then((data) => {
-            return data.text() 
+            return data.text();
         }).then((html) => {
             JTR_ROUTES[route].cache = html;
-            resolve(html) 
+            resolve(html);
         });
     });
 }
@@ -45,7 +50,7 @@ function loadRoute() {
     if(undefined !== JTR_ROUTES[route]) {
         let rPromise = (null === JTR_ROUTES[route].cache) ? obtainHtml(route) : new Promise((resolve, reject) => resolve(JTR_ROUTES[route].cache) );
 
-        rPromise.then(renderHtml)
+        rPromise.then(renderHtml);
     } else
         throw new Error("No route found");
 }
@@ -63,4 +68,4 @@ function renderHtml(html) {
 
 export {
     loadRoute
-}
+};

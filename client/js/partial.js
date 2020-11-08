@@ -8,7 +8,8 @@
  * @brief Renderer for partials
  */
 const JTR_PARTIALS = {
-    "jtr-navbar": { "templateUrl": "partial/components/navbar.html", "javascript": "", "cache": null }
+    "jtr-navbar": { "templateUrl": "partial/components/navbar.html", "javascript": "", "cache": null },
+    "jtr-footer": { "templateUrl": "partial/components/footer.html", "javascript": "", "cache": null }
 };
 
 /**
