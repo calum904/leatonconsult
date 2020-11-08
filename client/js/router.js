@@ -13,13 +13,16 @@ import { navbarUpdate } from "./navbar.js";
 
 import { loadHtml } from "./loadHtml.js";
 
+/* Controllers */
+import { init as msInit } from "./motorsport.js";
+
 const JTR_APP_NAME = "jtrApp";
 
 const JTR_ROUTES = {
-    "home":       { "templateUrl": "partial/views/home.html",       "cache": null },
-    "about":      { "templateUrl": "partial/views/about.html",      "cache": null },
-    "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null },
-    "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null }
+    "home":       { "templateUrl": "partial/views/home.html",       "cache": null, "init": null   },
+    "about":      { "templateUrl": "partial/views/about.html",      "cache": null, "init": null   },
+    "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null, "init": null   },
+    "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null, "init": msInit }
 };
 
 window.addEventListener("hashchange", loadRoute);
@@ -65,8 +68,18 @@ function loadRoute() {
  */
 function renderHtml(html) {
     let app = document.getElementById(JTR_APP_NAME);
-    app.innerHTML = html;
-    renderPartials().then(() => navbarUpdate() );
+
+    if(null !== app) {
+        app.innerHTML = html;
+        renderPartials().then(() => {
+            let route = location.hash.slice(2);
+
+            navbarUpdate();
+
+            if(null !== JTR_ROUTES[route].init)
+                JTR_ROUTES[route].init();
+        });
+    }
 }
 
 export {

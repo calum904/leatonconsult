@@ -11,9 +11,7 @@ import { loadRoute } from "./router.js";
 
 import { loadPartials } from "./partial.js";
 
-(function(scope) {
-     document.addEventListener("DOMContentLoaded", () => {
-        loadPartials();
-        loadRoute();
-     });
-})((undefined !== window) ? window : global);
+document.addEventListener("DOMContentLoaded", () => {
+    loadPartials();
+    loadRoute();
+});

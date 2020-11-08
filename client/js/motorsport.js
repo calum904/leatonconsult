@@ -12,10 +12,26 @@ import { loadHtml } from "./loadHtml.js";
 const JTR_TAB_BODY_ID = "motorsportTabBody";
 
 const JTR_MS_TABS = {
-    "other":             { "templateUrl": "client/partial/views/motorsport-other.html",  "cache": null },
-    "resultService":     { "templateUrl": "client/partial/views/motorsport-result.html", "cache": null },
-    "vboxCameraService": { "templateUrl": "client/partial/views/motorsport-vbox.html",   "cache": null }
+    "other":             { "templateUrl": "partial/views/motorsport-other.html",  "cache": null },
+    "resultService":     { "templateUrl": "partial/views/motorsport-result.html", "cache": null },
+    "vboxCameraService": { "templateUrl": "partial/views/motorsport-vbox.html",   "cache": null }
 };
+
+/**
+ * @brief Binds the tab navigation to the view
+ */
+function bindTabNavigation() {
+    for(let tab in JTR_MS_TABS) {
+        let elem = document.getElementById(tab + "Item");
+
+        if(null !== elem) {
+            elem.addEventListener("click", function() { 
+                showTabContent(this.getAttribute("display-data"));
+            });
+        } else
+            console.log("[ERROR] Unable to bind tab element");
+    }
+}
 
 /**
  * @brief Renders the tabs contents to the DOm
@@ -28,7 +44,7 @@ function showTabContent(tabName) {
     
     let htmlPromise = (null === tab.cache) ? loadHtml(tab.templateUrl) : new Promise((resolve) => resolve(tab.cache));
 
-    htmlPromise((html) => {
+    htmlPromise.then((html) => {
         let tabBody = document.getElementById(JTR_TAB_BODY_ID);
 
         if(null === tab.cache)
@@ -39,6 +55,12 @@ function showTabContent(tabName) {
     });
 }
 
+function init() {
+    showTabContent("vboxCameraService");
+    bindTabNavigation();
+}
+
 export {
+    init,
     showTabContent
 };
