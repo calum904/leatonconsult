@@ -8,13 +8,16 @@
  * @brief A simple UI Router for VanillaJS Single Page Applications
  */
 import { renderPartials } from "./partial.js";
+
+import { navbarUpdate } from "./navbar.js";
+
 const JTR_APP_NAME = "jtrApp";
 
 const JTR_ROUTES = {
-    "home":       { "templateUrl": "partial/views/home.html",       "javascript": "", "cache": null },
-    "about":      { "templateUrl": "partial/views/about.html",      "javascript": "", "cache": null },
-    "contact":    { "templateUrl": "partial/views/contact.html",    "javascript": "", "cache": null },
-    "motorsport": { "templateUrl": "partial/views/motorsport.html", "javascript": "", "cache": null }
+    "home":       { "templateUrl": "partial/views/home.html",       "cache": null },
+    "about":      { "templateUrl": "partial/views/about.html",      "cache": null },
+    "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null },
+    "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null }
 };
 
 window.addEventListener("hashchange", loadRoute);
@@ -63,7 +66,7 @@ function loadRoute() {
 function renderHtml(html) {
     let app = document.getElementById(JTR_APP_NAME);
     app.innerHTML = html;
-    renderPartials();
+    renderPartials().then(() => navbarUpdate() );
 }
 
 export {

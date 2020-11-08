@@ -40,18 +40,26 @@ function obtainHtml(tagName) {
 /**
  * @brief Iterates through the available lists of partials &
  *        attempts to apply them to the DOM
+ *
+ * @return promise - To be fulfiled when all partials are loaded
  */
 function renderPartials() {
-    for(let index in JTR_PARTIALS) {
-        let htmlPromise = (null === JTR_PARTIALS[index].cache) ? obtainHtml(index) : new Promise((resolve) => resolve({ "tag": index, "html": JTR_PARTIALS[index].cache }) );
-    
-        htmlPromise.then((html) => {
-            let tags = document.querySelectorAll(html.tag);
+    return new Promise((resolve, reject) => {
+        let allPromises = [];
+        for(let index in JTR_PARTIALS) {
+            let htmlPromise = (null === JTR_PARTIALS[index].cache) ? obtainHtml(index) : new Promise((resolve) => resolve({ "tag": index, "html": JTR_PARTIALS[index].cache }) );
+            allPromises.push(htmlPromise);
 
-            for(let el of tags)
-                el.innerHTML = html.html;
-        });
-    }
+            htmlPromise.then((html) => {
+                let tags = document.querySelectorAll(html.tag);
+
+                for(let el of tags)
+                    el.innerHTML = html.html;
+            });
+        }
+
+        Promise.all(allPromises).then(() => resolve(), () => reject() );
+    });
 }
 
 export {
