@@ -26,7 +26,6 @@ var JTR_JUMBO_IMAGES = DEFAULT_JTR_JUMBO_IMAGES;
  */
 function getJumboImage(loc) {
     let path = (undefined !== JTR_JUMBO_IMAGES[loc]) ? JTR_JUMBO_IMAGES[loc] : JTR_JUMBO_IMAGES["home"];
-    console.log("Path: ", path);
     return path;
 }
 

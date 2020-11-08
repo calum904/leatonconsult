@@ -84,8 +84,6 @@ function renderHtml(html) {
                 JTR_ROUTES[route].init();
 
             let elem = document.getElementById(route + "Jumbotron");
-            console.log("Elem:", elem);
-            console.log("Jumbo", getJumboImage(route));
 
             if(null !== elem)
                 elem.style.setProperty("background-image", "url(" + getJumboImage(route) + ")");
