@@ -11,6 +11,8 @@ import { renderPartials } from "./partial.js";
 
 import { navbarUpdate } from "./navbar.js";
 
+import { loadHtml } from "./loadHtml.js";
+
 const JTR_APP_NAME = "jtrApp";
 
 const JTR_ROUTES = {
@@ -30,9 +32,7 @@ window.addEventListener("hashchange", loadRoute);
  */
 function obtainHtml(route) {
     return new Promise((resolve, reject) => {
-        fetch(JTR_ROUTES[route].templateUrl).then((data) => {
-            return data.text();
-        }).then((html) => {
+        loadHtml(JTR_ROUTES[route].templateUrl).then((html) => {
             JTR_ROUTES[route].cache = html;
             resolve(html);
         });
