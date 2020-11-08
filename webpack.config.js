@@ -14,6 +14,7 @@ const path              = require("path"),
       MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+console.log("Exclude! ", path.resolve(path.join(__dirname, "client", "index.html")));
 
 module.exports = {
     "entry": "./webpack/index.js",
@@ -61,15 +62,8 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new webpack.ProvidePlugin({
-            "$": "jquery",
+            "$":      "jquery",
             "jQuery": "jquery"
-        }),
-        new CopyPlugin({
-            "patterns": [
-                { "from": "client/icons",  "to": "icons" },
-                { "from": "client/images", "to": "images" }
-                
-            ]
         })
     ]
 };

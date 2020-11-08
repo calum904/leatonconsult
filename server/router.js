@@ -11,6 +11,7 @@ apiRouter.use((req, res, next) => {
 });
 
 apiRouter.use(express.static(path.join(BASE_DIR, "client")));
+apiRouter.use(express.static(path.join(BASE_DIR, "dist")));
 apiRouter.use(express.static(path.join(BASE_DIR, "node_modules")));
 
 module.exports = apiRouter;

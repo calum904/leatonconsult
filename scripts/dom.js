@@ -35,6 +35,12 @@ if(process.argv.length >= 4) {
             for(let elem of scriptElems)
                 elem.parentElement.removeChild(elem);
 
+            const BASE_HREF = "https://calum904.github.io/leatonconsultancy.github.io/dist/";
+            console.log(`[INFO] Setting base HREF ${BASE_HREF}`);
+            let baseHref = dom.window.document.createElement("base");
+            baseHref.href = BASE_HREF;
+            //dom.window.document.head.appendChild(baseHref);
+
             console.log(`[INFO] Writing output to ${output}`);
             fs.writeFile(output, dom.window.document.documentElement.outerHTML, (err) => {
                 if(null === err)

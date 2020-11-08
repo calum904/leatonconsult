@@ -13,6 +13,8 @@ import { navbarUpdate } from "./navbar.js";
 
 import { loadHtml } from "./loadHtml.js";
 
+import { getJumboImage } from "./jumboImages.js";
+
 /* Controllers */
 import { init as msInit } from "./motorsport.js";
 
@@ -80,6 +82,13 @@ function renderHtml(html) {
 
             if(null !== JTR_ROUTES[route].init)
                 JTR_ROUTES[route].init();
+
+            let elem = document.getElementById(route + "Jumbotron");
+            console.log("Elem:", elem);
+            console.log("Jumbo", getJumboImage(route));
+
+            if(null !== elem)
+                elem.style.setProperty("background-image", "url(" + getJumboImage(route) + ")");
         });
     }
 }
