@@ -25,12 +25,34 @@ function bindTabNavigation() {
         let elem = document.getElementById(tab + "Item");
 
         if(null !== elem) {
-            elem.addEventListener("click", function() { 
+            elem.addEventListener("click", function() {
+                setActive.call(this); 
                 showTabContent(this.getAttribute("display-data"));
             });
         } else
             console.log("[ERROR] Unable to bind tab element");
     }
+}
+
+/**
+ * @brief Sets the active tab class to the card header
+ */
+function setActive() {
+    for(let index in JTR_MS_TABS) {
+        let elem = document.getElementById(index + "Item");
+
+        if(null !== elem) {
+            let aTag = elem.querySelector("a");
+
+            if(null !== aTag)
+                aTag.classList.remove("active");
+        }
+    }
+    
+    let aTag = this.querySelector("a");
+
+    if(null !== aTag)
+        aTag.classList.add("active");
 }
 
 /**
@@ -55,6 +77,9 @@ function showTabContent(tabName) {
     });
 }
 
+/**
+ * @brief Bootstraps the view
+ */
 function init() {
     showTabContent("vboxCameraService");
     bindTabNavigation();
