@@ -18,13 +18,15 @@ import { getJumboImage } from "./jumboImages.js";
 /* Controllers */
 import { init as msInit } from "./motorsport.js";
 
+import { init as conInit } from "./contact.js";
+
 const JTR_APP_NAME = "jtrApp";
 
 const DEFAULT_JTR_ROUTES = { 
-    "home":       { "templateUrl": "partial/views/home.html",       "cache": null, "init": null   },
-    "about":      { "templateUrl": "partial/views/about.html",      "cache": null, "init": null   },
-    "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null, "init": null   },
-    "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null, "init": msInit }
+    "home":       { "templateUrl": "partial/views/home.html",       "cache": null, "init": null    },
+    "about":      { "templateUrl": "partial/views/about.html",      "cache": null, "init": null    },
+    "contact":    { "templateUrl": "partial/views/contact.html",    "cache": null, "init": conInit },
+    "motorsport": { "templateUrl": "partial/views/motorsport.html", "cache": null, "init": msInit  }
 };
 
 var JTR_ROUTES = DEFAULT_JTR_ROUTES;

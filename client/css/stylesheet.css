@@ -17,3 +17,11 @@ jtr-body {
 .jtr-date {
     text-decoration: underline;
 }
+
+.jtr-alert {
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+    z-index: 10000;
+    position: fixed;
+}

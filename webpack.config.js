@@ -7,10 +7,10 @@
  *
  * @brief Web Pack configuration file
  */
-const path              = require("path"),
-      webpack           = require("webpack"),
-      CopyPlugin = require('copy-webpack-plugin'),
-      HtmlWebpackPlugin = require('html-webpack-plugin'),
+const path                 = require("path"),
+      webpack              = require("webpack"),
+      CopyPlugin           = require('copy-webpack-plugin'),
+      HtmlWebpackPlugin    = require('html-webpack-plugin'),
       MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -64,6 +64,12 @@ module.exports = {
         new webpack.ProvidePlugin({
             "$":      "jquery",
             "jQuery": "jquery"
+        }),
+        new CopyPlugin({
+            "patterns": [
+                { "from": "client/icons",  "to": "icons"  },
+                { "from": "client/images", "to": "images" }
+            ]
         })
     ]
 };

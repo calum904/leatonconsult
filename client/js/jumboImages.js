@@ -41,4 +41,4 @@ function setJumboImages(images) {
 export {
     getJumboImage,
     setJumboImages
-}
+};
