@@ -46,7 +46,6 @@ function bindData() {
 function validateSubmission() {
     let valid = false;
     let alert = $('#alert');
-    console.log("Alert: ", alert);
 
     for(let idx in JTR_CONTACT_FIELDS) {
         valid = (0 !== JTR_CONTACT_FIELDS[idx].data.length) ? true : false;
@@ -55,13 +54,30 @@ function validateSubmission() {
             break;
     }
     
-    console.log("Valid: ", valid);
     if(true === valid) {
+        constructTemplateEmail();
     } else {
-        console.log("Create Alert");
         createAlert();
     }
-    console.log("Data:", JTR_CONTACT_FIELDS);
+}
+
+/**
+ * @brief Constructs an email from the given contact fields
+ */
+function constructTemplateEmail() {
+    let aElem = document.createElement("a"),
+        emailMsg = "",
+        emailUrl = new URL("mailto:josh.taylor@leatonconsult.co.uk");
+
+    emailMsg += "Name: "     + JTR_CONTACT_FIELDS["inputFullName"].data + "\n";
+    emailMsg += "Contact: "  + JTR_CONTACT_FIELDS["inputEmail"].data    + " " + JTR_CONTACT_FIELDS["inputPhone"].data + "\n";
+    emailMsg += "Message:\n" + JTR_CONTACT_FIELDS["inputMessage"].data  + "\n";
+
+    emailUrl.searchParams.append("subject", "Enquiry into " + JTR_CONTACT_FIELDS["inputService"].data);
+    emailUrl.searchParams.append("body", emailMsg);
+
+    aElem.href = emailUrl.href;
+    aElem.click();
 }
 
 /**

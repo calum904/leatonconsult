@@ -13,7 +13,7 @@ const logger  = require("./logger"),
 
 const app = express();
 
-const port = process.env.JTR_PORT || 9810;
+const port = process.env.PORT || 8080;
 
 app.use(router);
 
